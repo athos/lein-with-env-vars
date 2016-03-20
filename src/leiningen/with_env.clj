@@ -7,7 +7,7 @@
   [project task-name & args]
   (try
     (let [task-name (main/lookup-alias task-name project)]
-      (binding [eval/*env* (:jvm-env project {})]
+      (binding [eval/*env* (:env-vars project {})]
         (main/apply-task task-name project args)))
     (catch Exception e
       (main/info (format "Error encountered performing task '%s'" task-name))
