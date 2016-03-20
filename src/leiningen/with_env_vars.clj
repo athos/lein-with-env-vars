@@ -1,9 +1,9 @@
-(ns leiningen.with-env
+(ns leiningen.with-env-vars
   (:require [leiningen.core
              [main :as main]
              [eval :as eval]]))
 
-(defn ^:no-project-needed ^:higher-order with-env
+(defn ^:no-project-needed ^:higher-order with-env-vars
   "Perform a task with environment variable settings loaded from project.clj.
 Specify environment variable settings with :env-vars key in project.clj."
   [project task-name & args]
