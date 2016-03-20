@@ -4,6 +4,8 @@
              [eval :as eval]]))
 
 (defn ^:no-project-needed ^:higher-order with-env
+  "Perform a task with environment variable settings loaded from project.clj.
+Specify environment variable settings with :env-vars key in project.clj."
   [project task-name & args]
   (try
     (let [task-name (main/lookup-alias task-name project)]
