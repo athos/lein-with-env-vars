@@ -1,14 +1,17 @@
 # lein-with-env-vars
+[![Clojars Project](https://img.shields.io/clojars/v/lein-with-env-vars.svg)](https://clojars.org/lein-with-env-vars)
 
 A Leiningen plugin for performing a task with environment variable settings loaded from project.clj
 
+## Install
+
+Add the following line into the `:plugins` vector of an appropriate profile.
+
+[![Clojars Project](https://clojars.org/lein-with-env-vars/latest-version.svg)](https://clojars.org/lein-with-env-vars)
+
 ## Usage
 
-First, put the spec below into the `:plugins` vector of an appropriate profile.
-
-[![Clojars Project](https://img.shields.io/clojars/v/lein-with-env-vars.svg)](https://clojars.org/lein-with-env-vars)
-
-And add `:env-vars` map to specify the environment variable settings in project.clj like the following:
+First, add `:env-vars` map to specify the environment variable settings in project.clj like the following:
 
 ```clj
 (defproject foo-bar
@@ -20,7 +23,7 @@ And add `:env-vars` map to specify the environment variable settings in project.
   ...  )
 ```
 
-Then, you can run a task with `with-env-vars` to set the environment variables according to the settings:
+And then, you can run a task with `with-env-vars` to set the environment variables according to the settings:
 
     $ lein with-env-vars repl
     ...
@@ -32,7 +35,7 @@ Then, you can run a task with `with-env-vars` to set the environment variables a
 
 [Environ](https://github.com/weavejester/environ) (or lein-environ) is another tool for managing environment settings.
 
-Though it supports environment variables as one of its setting sources, Environ does **not** actually set environment variables when staring a task process. So, for example, you want to use a library that requires a certain environment variable to be set, it won't work suitably.
+Though it supports environment variables as one of its setting sources, Environ does **NOT** actually set environment variables when starting a task process. So, for example, if you want to use a library that requires a certain environment variable to be set, it wouldn't work suitably.
 
 ## License
 
