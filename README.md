@@ -31,6 +31,8 @@ And then, you can run a task with `with-env-vars` to set the environment variabl
     "foo/bar/baz"
     user=>
 
+See also [the example project](examples/example) to see how to use the plugin in a practical project.
+
 ## Why not use Environ?
 
 [Environ](https://github.com/weavejester/environ) (or lein-environ) is another tool for managing environment settings.
