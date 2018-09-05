@@ -43,5 +43,7 @@ viewed as the name of files containing environment variable settings."
   (with-env-vars-in project task-name
     (f task-name project args)))
 
-(defn auto-inject []
+(defn auto-inject
+  "A plugin hook to automatically inject environment variables for every task execution."
+  []
   (hooke/add-hook #'leiningen.core.main/apply-task #'inject-env-vars))
