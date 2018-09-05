@@ -2,7 +2,8 @@
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
             [leiningen.core.eval :as eval]
-            [leiningen.core.main :as main]))
+            [leiningen.core.main :as main]
+            [robert.hooke :as hooke]))
 
 (defn- read-env-vars [file]
   (edn/read-string (slurp (io/file file))))
@@ -17,6 +18,10 @@
 
         :else env-vars))
 
+(defmacro with-env-vars-in [project task-name & body]
+  `(binding [eval/*env* (collect-env-vars ~project)]
+     ~@body))
+
 (defn ^:no-project-needed ^:higher-order with-env-vars
   "Perform a task with environment variable settings loaded from project.clj.
 
@@ -25,11 +30,18 @@ If you instead specify a string or vector of strings to that key, they will be
 viewed as the name of files containing environment variable settings."
   [project task-name & args]
   (try
-    (let [task-name (main/lookup-alias task-name project)]
-      (binding [eval/*env* (collect-env-vars project)]
+    (with-env-vars-in project task-name
+      (let [task-name (main/lookup-alias task-name project)]
         (main/apply-task task-name project args)))
-    (catch Exception e
-      (main/info (format "Error encountered performing task '%s'" task-name))
-      (if (and (:exit-code (ex-data e)) (not main/*debug*))
-        (main/info (.getMessage e))
-        (.printStackTrace e)))))
+    (catch Exception e#
+      (main/info (format "Error encountered performing task '%s'" ~task-name))
+      (if (and (:exit-code (ex-data e#)) (not main/*debug*))
+        (main/info (.getMessage e#))
+        (.printStackTrace e#)))))
+
+(defn- inject-env-vars [f task-name project args]
+  (with-env-vars-in project task-name
+    (f task-name project args)))
+
+(defn hooks []
+  (hooke/add-hook #'leiningen.core.main/apply-task #'inject-env-vars))
