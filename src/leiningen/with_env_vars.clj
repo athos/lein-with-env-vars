@@ -43,5 +43,5 @@ viewed as the name of files containing environment variable settings."
   (with-env-vars-in project task-name
     (f task-name project args)))
 
-(defn hooks []
+(defn auto-inject []
   (hooke/add-hook #'leiningen.core.main/apply-task #'inject-env-vars))
