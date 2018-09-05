@@ -1,4 +1,4 @@
-(defproject lein-with-env-vars "0.1.0"
+(defproject lein-with-env-vars "0.2.0-SNAPSHOT"
   :description "A Leiningen plugin for performing a task with environment variable settings loaded from project.clj"
   :url "https://github.com/athos/lein-with-env-vars"
   :license {:name "Eclipse Public License"
