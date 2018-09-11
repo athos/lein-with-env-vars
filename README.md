@@ -53,6 +53,29 @@ then `lein with-env-vars repl` will work exactly as the above example:
   ...  )
 ```
 
+### Leiningen hooks
+
+This plugin also provides Leiningen hooks to inject environment variables automatically.
+
+To enable the hook, add `leiningen.with-env-vars/auto-inject` to `:hooks` key:
+
+```clj
+(defproject foo-bar
+
+  ...
+
+  :hooks [leiningen.with-env-vars/auto-inject]
+
+  ... )
+```
+
+Once you specify the hook, no need to use the `with-env-vars` higher-order task explicitly.
+Every time you run a Leiningen task, the specified environment variables will be injected automatically.
+
+**Note** This hook mechanism is useful, but could also be problematic in some cases.
+If the hook is enabled and a file name is specified to the `:env-vars` key, the hook always
+checks whether the file exists (and if not, it will fail) every time you run a Leiningen task.
+
 See also [the example project](examples/example) to see how to use the plugin in a practical project.
 
 ## Why not use Environ?
