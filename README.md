@@ -3,7 +3,7 @@
 
 A Leiningen plugin for performing a task with environment variable settings loaded from project.clj
 
-## Install
+## Installation
 
 Add the following line into the `:plugins` vector of an appropriate profile.
 
@@ -11,7 +11,8 @@ Add the following line into the `:plugins` vector of an appropriate profile.
 
 ## Usage
 
-First, add `:env-vars` map to specify the environment variable settings in project.clj like the following:
+First, add `:env-vars` map to specify the environment variable settings in your `project.clj`
+like the following:
 
 ```clj
 (defproject foo-bar
@@ -23,7 +24,7 @@ First, add `:env-vars` map to specify the environment variable settings in proje
   ...  )
 ```
 
-And then, you can run a task with `with-env-vars` to set the environment variables according to the settings:
+And then, run a task with `with-env-vars` to set the environment variables according to the settings:
 
     $ lein with-env-vars repl
     ...
