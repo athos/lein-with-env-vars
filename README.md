@@ -26,20 +26,22 @@ like the following:
 
 And then, run a task with `with-env-vars` to set the environment variables according to the settings:
 
-    $ lein with-env-vars repl
-    ...
-    user=> (System/getenv "ENV_VAR_FOO")
-    "foo/bar/baz"
-    user=>
+```clj
+$ lein with-env-vars repl
+...
+user=> (System/getenv "ENV_VAR_FOO")
+"foo/bar/baz"
+user=>
+```
 
 You can also specify a string or a vector of strings instead of a map to the `:env-vars` key.
 In that case, those will be interpreted as the name of files containing environment variable settings.
 
 For instance, say you have a file named `.env-vars` whose content is as follows:
 
-    ```clj
-    {:ENV_VAR_FOO "foo/bar/baz"}
-    ```
+```clj
+{:ENV_VAR_FOO "foo/bar/baz"}
+```
 
 And if you specify `[".env-vars"]` to the `:env-vars` key in `project.clj`,
 then `lein with-env-vars repl` will work exactly as the above example:
